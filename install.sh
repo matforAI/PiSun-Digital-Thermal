@@ -55,6 +55,7 @@ apt-get install -y \
     python3-spidev \
     python3-smbus \
     python3-pil \
+    python3-numpy \
     python3-venv \
     python3-pip-whl
 

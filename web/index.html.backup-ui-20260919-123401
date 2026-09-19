@@ -118,21 +118,6 @@ body {
     width: 100%;
     height: 100%;
     border: 0;
-    display: block;
-    background: #000;
-}
-
-.video-frame #thermalVideo {
-    position: absolute;
-    width: 82%;
-    height: 82%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: contain;
-    object-position: center center;
-    background: #000;
-    border-radius: 4px;
 }
 
 .camera-label {
@@ -362,12 +347,6 @@ body {
                     allow="autoplay; fullscreen">
                 </iframe>
 
-                <img
-                    id="thermalVideo"
-                    src=""
-                    alt="Тепловізійна камера"
-                    style="display:none;">
-
                 <button class="fullscreen" onclick="fullscreenVideo()">
                     ⛶
                 </button>
@@ -540,54 +519,42 @@ let currentZoom = 1.0;
 function selectCamera(camera) {
 
     const video = document.getElementById("video");
-    const thermalVideo = document.getElementById("thermalVideo");
     const label = document.getElementById("cameraLabel");
 
     const mainBtn = document.getElementById("mainCameraBtn");
     const thermalBtn = document.getElementById("thermalCameraBtn");
 
+
     if (camera === "main") {
 
         currentCamera = "main";
 
-        thermalVideo.style.display = "none";
-        thermalVideo.src = "";
-
-        video.style.display = "block";
         video.src = "http://pisun.local:8889/cam/";
-
-        video.style.transform =
-            "scale(" + currentZoom + ")";
-
-        video.style.transformOrigin =
-            "center center";
 
         label.innerHTML = "📷 Основна камера";
 
         mainBtn.classList.add("active");
         thermalBtn.classList.remove("active");
+
     }
+
 
     if (camera === "thermal") {
 
         currentCamera = "thermal";
 
-        video.style.display = "none";
-        video.src = "";
+        /*
+         * Тепловізор підключимо сюди пізніше.
+         * Очікуваний MediaMTX path: /thermal
+         */
 
-        thermalVideo.style.display = "block";
-        thermalVideo.src = "http://pisun.local:8090/thermal";
-
-        thermalVideo.style.transform =
-            "translate(-50%, -50%) scale(" + currentZoom + ")";
-
-        thermalVideo.style.transformOrigin =
-            "center center";
+        video.src = "http://pisun.local:8090/thermal";
 
         label.innerHTML = "🔥 Тепловізійна";
 
         thermalBtn.classList.add("active");
         mainBtn.classList.remove("active");
+
     }
 
 }
@@ -625,23 +592,15 @@ function cameraCommand(command) {
 
 
 function zoom(direction) {
-
     if (direction > 0) {
         currentZoom = Math.min(4.0, currentZoom + 0.5);
     } else {
         currentZoom = Math.max(1.0, currentZoom - 0.5);
     }
 
-    const media =
-        currentCamera === "thermal"
-            ? document.getElementById("thermalVideo")
-            : document.getElementById("video");
-
-    media.style.transform =
-        "scale(" + currentZoom + ")";
-
-    media.style.transformOrigin =
-        "center center";
+    const video = document.getElementById("video");
+    video.style.transform = "scale(" + currentZoom + ")";
+    video.style.transformOrigin = "center center";
 
     document.getElementById("zoomValue").innerText =
         currentZoom.toFixed(1) + "x";
