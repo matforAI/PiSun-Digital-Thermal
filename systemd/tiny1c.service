@@ -1,0 +1,13 @@
+[Unit]
+Description=Tiny1-C Thermal Camera
+After=network.target dev-i2c-1.device
+Wants=dev-i2c-1.device
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/tiny1c-start.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
