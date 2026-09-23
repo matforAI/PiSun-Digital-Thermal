@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Камера PiSun</title>
+<title>Камера Snoop</title>
 
 <style>
 * {
@@ -331,7 +331,7 @@ body {
         <div class="logo">
             <div class="logo-icon">📷</div>
             <div>
-                <div class="title">Камера PiSun</div>
+                <div class="title">Камера Snoop</div>
                 <div class="subtitle">Відеоспостереження та керування</div>
             </div>
         </div>
@@ -525,7 +525,7 @@ body {
 
 
     <div class="footer">
-        PiSun • Raspberry Pi Zero 2 W
+        Snoop • 78 ОДШбр
     </div>
 
 </div>
@@ -578,12 +578,6 @@ function selectCamera(camera) {
         thermalVideo.style.display = "block";
         thermalVideo.src = "http://pisun.local:8090/thermal";
 
-        thermalVideo.style.transform =
-            "translate(-50%, -50%) scale(" + currentZoom + ")";
-
-        thermalVideo.style.transformOrigin =
-            "center center";
-
         label.innerHTML = "🔥 Тепловізійна";
 
         thermalBtn.classList.add("active");
@@ -625,6 +619,10 @@ function cameraCommand(command) {
 
 
 function zoom(direction) {
+
+    if (currentCamera === "thermal") {
+        return;
+    }
 
     if (direction > 0) {
         currentZoom = Math.min(4.0, currentZoom + 0.5);

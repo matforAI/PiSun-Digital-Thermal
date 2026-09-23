@@ -18,7 +18,7 @@ OUT_H = 384
 spi = spidev.SpiDev()
 spi.open(0, 0)
 spi.mode = 3
-spi.max_speed_hz = 20000000
+spi.max_speed_hz = 16000000
 spi.lsbfirst = False
 spi.threewire = False
 spi.cshigh = False
@@ -242,31 +242,6 @@ class Handler(BaseHTTPRequestHandler):
                     ),
                     outline="white",
                     width=2
-                )
-
-                # ==================================================
-                # Информация
-                # ==================================================
-
-                center = int(
-                    vals[H // 2, W // 2]
-                )
-
-                draw.rectangle(
-                    (10, 10, 300, 75),
-                    fill=(0, 0, 0)
-                )
-
-                draw.text(
-                    (20, 18),
-                    f"FRAME {frame_no}",
-                    fill="white"
-                )
-
-                draw.text(
-                    (20, 42),
-                    f"Y16 {center}   RANGE {int(lo)}-{int(hi)}",
-                    fill="white"
                 )
 
                 # ==================================================
