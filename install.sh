@@ -147,13 +147,13 @@ ARCH="$(dpkg --print-architecture)"
 
 case "$ARCH" in
     arm64)
-        MTX_ASSET="mediamtx_${MEDIAMTX_VERSION#v}_linux_arm64.tar.gz"
+        MTX_ASSET="mediamtx_v${MEDIAMTX_VERSION#v}_linux_arm64.tar.gz"
         ;;
     armhf)
-        MTX_ASSET="mediamtx_${MEDIAMTX_VERSION#v}_linux_armv7.tar.gz"
+        MTX_ASSET="mediamtx_v${MEDIAMTX_VERSION#v}_linux_armv7.tar.gz"
         ;;
     amd64)
-        MTX_ASSET="mediamtx_${MEDIAMTX_VERSION#v}_linux_amd64.tar.gz"
+        MTX_ASSET="mediamtx_v${MEDIAMTX_VERSION#v}_linux_amd64.tar.gz"
         ;;
     *)
         echo "ОШИБКА: неподдерживаемая архитектура: $ARCH"
